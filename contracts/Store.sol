@@ -7,7 +7,7 @@ contract Store{
 
     function Depositar() public payable{
                 
-        balances[msg.sender] = msg.value;
+        balances[msg.sender] += msg.value;
 
     }
 
@@ -16,7 +16,12 @@ contract Store{
 
         (bool success,) = payable(msg.sender).call{value:balances[msg.sender]}("");
 
+    
+    
         require(success,"Houve um erro");
+
+        balances[msg.sender] = 0;
     }
+
 
 }
